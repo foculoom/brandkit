@@ -1,0 +1,29 @@
+{
+  "name": "brandkit",
+  "description": "Foculoom Copilot CLI plugin \u2014 brand asset pipeline, visual QA, compliance, and product-ops skills",
+  "version": "1.0.0",
+  "author": {
+    "name": "Foculoom LLC",
+    "url": "https://github.com/foculoom"
+  },
+  "repository": "https://github.com/foculoom/brandkit",
+  "homepage": "https://github.com/foculoom/brandkit",
+  "license": "MIT",
+  "keywords": [
+    "brandkit",
+    "copilot",
+    "brand",
+    "assets",
+    "compliance",
+    "foculoom"
+  ],
+  "skills": [
+    "skills/brand-asset-pipeline",
+    "skills/brand-compliance",
+    "skills/release-asset-fanout",
+    "skills/sprite-gen",
+    "skills/a11y-godot",
+    "skills/llc-ops"
+  ],
+  "hooks": "hooks.json"
+}
