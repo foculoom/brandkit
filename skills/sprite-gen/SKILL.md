@@ -11,7 +11,7 @@ tier: standard
 - **Preferred:** `claude-sonnet-4.6`
 - **Cost-tier fallback:** `claude-haiku-4.5` — see `/fallback-mode`
 - **Source of truth:** Model Routing Matrix in `.github/skills/dev-session/SKILL.md`
-- **Art director review step:** `claude-opus-4.7` (Domain-14/15/16 judgment)
+- **Art director review step:** `claude-opus-4.8` (Domain-14/15/16 judgment)
 
 ---
 

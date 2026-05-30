@@ -8,7 +8,7 @@ tier: two-pass
 
 ## Model
 
-- **Preferred:** `claude-sonnet-4.6` (default); escalate to `claude-opus-4.7` for Social Media Art-Director Review (§8) — qualitative judgment matches the `reviewer-qa-gate` Pass 2 standard
+- **Preferred:** `claude-sonnet-4.6` (default); escalate to `claude-opus-4.8` for Social Media Art-Director Review (§8) — qualitative judgment matches the `reviewer-qa-gate` Pass 2 standard
 - **Cost-tier fallback:** `/model auto` → `claude-sonnet-4.5`; for Opus-escalation use `claude-sonnet-4.6 --effort xhigh` + mandatory rubber-duck — see `/fallback-mode` (foculoom/foculoom-project#463)
 - **Source of truth:** Model Routing Matrix in `.github/skills/dev-session/SKILL.md`
 
