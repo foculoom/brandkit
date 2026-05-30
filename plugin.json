@@ -1,7 +1,7 @@
 {
   "name": "brandkit",
   "description": "Foculoom Copilot CLI plugin \u2014 brand asset pipeline, visual QA, compliance, and product-ops skills",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Foculoom LLC",
     "url": "https://github.com/foculoom"
