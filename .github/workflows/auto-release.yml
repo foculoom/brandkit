@@ -1,0 +1,62 @@
+name: Auto-release on version bump
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "plugin.json"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version from plugin.json
+        id: version
+        run: |
+          VERSION=$(jq -r .version plugin.json)
+          if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then
+            echo "ERROR: .version missing or null in plugin.json" >&2
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check if tag already exists
+        id: tag_check
+        run: |
+          if git tag --list "v${{ steps.version.outputs.version }}" | grep -q .; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate changelog since last tag
+        id: changelog
+        if: steps.tag_check.outputs.exists == 'false'
+        run: |
+          PREV_TAG=$(git tag --sort=-version:refname | head -1)
+          if [ -z "$PREV_TAG" ]; then
+            NOTES=$(git log --oneline --no-decorate | head -20)
+          else
+            NOTES=$(git log "${PREV_TAG}..HEAD" --oneline --no-decorate)
+          fi
+          echo "notes<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$NOTES" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        if: steps.tag_check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+          RELEASE_NOTES: ${{ steps.changelog.outputs.notes }}
+        run: |
+          gh release create "v${RELEASE_VERSION}" \
+            --title "v${RELEASE_VERSION}" \
+            --notes "${RELEASE_NOTES}" \
+            --target master
