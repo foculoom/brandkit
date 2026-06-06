@@ -66,26 +66,19 @@ with pointers to canonical sources.
 
 **This repo is part of the Foculoom product ecosystem.**
 
-When your session CWD is this repo (not `foculoom-project`), load the full workflow
-policy at session start before any spec, plan, or implementation work.
+**At every session start, you must load the foculoom-project workflow policy
+before any spec, plan, or implementation work:**
 
-foculoom-project base (default location — adjust if your checkout differs):
+1. Locate the foculoom-project checkout root (`FP`):
+   - Default: `~/foculoom/infra/foculoom-project`
+   - Auto-discover: `find ~/foculoom -maxdepth 4 -name foculoom-project -type d 2>/dev/null | head -1`
+   - **If not found: STOP — raise a founder gate before proceeding.**
+2. Read `$FP/.github/copilot-instructions.md` via the `view` tool.
+3. All relative paths in those instructions (`docs/mentor-registry.md`,
+   `.github/skills/`, `docs/policy/strategy-fit-gate.md`, etc.) resolve
+   from `$FP`, not from this repo's root.
 
-```
-FP=~/foculoom/infra/foculoom-project
-# Auto-discover if the path above doesn't exist:
-# FP=$(find ~/foculoom -maxdepth 4 -name foculoom-project -type d 2>/dev/null | head -1)
-```
-
-Then at session start, read: `view "$FP/.github/copilot-instructions.md"`
-
-All relative paths in those instructions (`docs/mentor-registry.md`,
-`.github/skills/`, `docs/policy/strategy-fit-gate.md`, etc.) resolve from `$FP`.
-
-**Non-negotiable gates (always active regardless of session CWD):**
-- Run `/dev-session` at start AND end of every session
-- Strategy-fit check before any BUILDER/PLANNER dispatch (governing: foculoom/foculoom-project#1309)
-- Mentor domain gap check before any spec, plan, or quality review (Domain 12 applies to skill authoring; Domain 16 applies to sprite-gen output)
-- Brand assets from `foculoombrand/assets/` only — never external download
-- PR-first: no direct default-branch pushes; all work tracked in foculoom/foculoom-project issues
-- (iOS/mobile only) TestFlight-first before any App Store submission
+All mandatory gates and workflow rules (strategy-fit, mentor domain check,
+dev-session lifecycle, brand asset sourcing, PR-first workflow, and all others)
+are defined in that file. Do not infer that any gate is optional because
+it is not listed here.
