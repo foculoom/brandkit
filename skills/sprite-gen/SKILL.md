@@ -49,11 +49,11 @@ After every generation, all three passes must complete BEFORE any founder gate f
 
 **Pass 1 — Self-review:** BUILDER checks generated asset against spec checklist. Address any spec mismatches before proceeding.
 
-**Pass 2 — Rubber-duck pass:** Spawn `task(agent_type: "rubber-duck", ...)` with full generation context (spec, prompt used, image output description). All ADOPT findings must be addressed before Pass 3.
+**Pass 2 — Rubber-duck pass:** BUILDER spawns `task(agent_type: "rubber-duck", ...)` with full generation context (spec, prompt used, image output description). All findings must be addressed or explicitly documented with rationale before Pass 3.
 
 **Pass 3 — Art Director REVIEWER pass:** REVIEWER runs Domain-16 triage + Domain-14/15 quality check. All findings must be addressed before the founder gate fires.
 
-Reference: `.github/copilot-instructions.md` § Visual Generation Review Gate (global rule governing this sequence).
+**Pass 3 verdict tiers (apply to REVIEWER output only):**
 
 - **Evaluator (structural PASS) is NOT sufficient for visual assets** — all three passes required
 - **Tier-A (FAIL hard block):** route back to BUILDER; do not surface to founder
