@@ -45,9 +45,17 @@ result = generate_character_figure(..., reference_image_url="/local/path.png")  
 
 ### 2. Art Director Gate Rule (MANDATORY — never skip)
 
-After every generation, REVIEWER runs Domain-16 triage + Domain-14/15 quality check BEFORE any founder gate fires.
+After every generation, all three passes must complete BEFORE any founder gate fires:
 
-- **Evaluator (structural PASS) is NOT sufficient for visual assets** — art director verdict required
+**Pass 1 — Self-review:** BUILDER checks generated asset against spec checklist. Address any spec mismatches before proceeding.
+
+**Pass 2 — Rubber-duck pass:** BUILDER spawns `task(agent_type: "rubber-duck", ...)` with full generation context (spec, prompt used, image output description). All findings must be addressed or explicitly documented with rationale before Pass 3.
+
+**Pass 3 — Art Director REVIEWER pass:** REVIEWER runs Domain-16 triage + Domain-14/15 quality check. All findings must be addressed before the founder gate fires.
+
+**Pass 3 verdict tiers (apply to REVIEWER output only):**
+
+- **Evaluator (structural PASS) is NOT sufficient for visual assets** — all three passes required
 - **Tier-A (FAIL hard block):** route back to BUILDER; do not surface to founder
 - **Tier-B (WARN advisory):** surface to founder with advisory note attached
 - **Tier-C (PASS):** surface to founder
