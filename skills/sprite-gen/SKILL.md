@@ -13,6 +13,9 @@ tier: standard
 - **Source of truth:** Model Routing Matrix in `.github/skills/dev-session/SKILL.md`
 - **Art director review step:** `claude-opus-4.8` (Domain-14/15/16 judgment)
 
+`tier: standard` remains correct for this skill because generation flow is standard;
+the art-director step is an explicit two-pass escalation gate, not the default model.
+
 ---
 
 ## Core Rules

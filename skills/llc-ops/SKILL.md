@@ -16,6 +16,11 @@ Compliance reminders and operational checklists for a California single-member L
 
 > ⚠️ **Reminder only.** This skill surfaces deadlines and checklists. It does NOT file taxes, make payments, or take any autonomous action. Per `agents/approval-policy.md`, tax filing and payment are **Never Autonomous**. The founder executes all actions.
 
+> ⚠️ **Current-source verification required.** Before giving deadline-specific advice,
+> verify the current filing dates and requirements on official sources (IRS, FTB,
+> CA Secretary of State, and Apple Developer docs where applicable). If current-year
+> dates cannot be verified in-session, label guidance as provisional.
+
 ## 1. Annual Compliance Calendar
 
 ### California State Filings

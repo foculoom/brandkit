@@ -20,6 +20,11 @@ Validates that a product surface (website, app, store listing) aligns with the c
 - Familiarity with [brand-kit.md](https://github.com/foculoom/foculoombrand/blob/master/docs/brand-kit.md)
 - Familiarity with [BRAND-MAP.md](https://github.com/foculoom/foculoombrand/blob/master/BRAND-MAP.md)
 
+## Evidence requirement
+
+For each compliance verdict, cite the exact source checked (file path + line range,
+URL, or screenshot path). Do not assert pass/fail without a source reference.
+
 ## Checklist
 
 ### 1. Color Palette (Fizzy Rainbow)

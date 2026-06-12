@@ -43,6 +43,17 @@ tier: standard
 
 **Existing canonical assets** (Play Owl icon, BloomPlay font, palette tokens) may be composited with Pillow — compositing is deterministic. Re-generating or updating an existing canonical asset requires explicit founder approval with a written rationale in the tracking issue.
 
+## Environment prerequisites (portable setup)
+
+Set these before running commands in this skill:
+
+- `FOCULOOMBRAND_PATH` — local path to `foculoombrand` repo
+- `RENDIT_PATH` — local path to `foculoom/rendit`
+- `BRANDKIT_OUTPUT_ROOT` (optional) — override output location for generated assets
+
+This skill assumes private repo/tool access. If a required repo or router backend is
+unavailable locally, stop and mark the step blocked instead of guessing paths.
+
 ## Critical rules — never deviate
 
 - **Router-first.** All image generation goes through the tiered router in
