@@ -27,7 +27,8 @@ Invoke this skill whenever a new product version is being prepared for release a
 
 - Pillow (`pip install Pillow`) installed in the Python environment
 - The source hero PNG must be ≥ 1600 px wide and in PNG format
-- `foculoombrand` repo must be checked out at the default path (`/Users/hello/foculoom/infra/foculoombrand/`)
+- `foculoombrand` repo path available via `FOCULOOMBRAND_PATH` (recommended)
+  or present at a local default path you control
 
 ## Asset Slots
 
@@ -76,7 +77,8 @@ Use `--block-on-compliance-fail` in CI or any automated context where off-brand 
 
 ```bash
 python3 -c "from PIL import Image, ImageOps; print('Pillow OK')"
-ls /Users/hello/foculoom/infra/foculoombrand/docs/brand-kit.md
+: "${FOCULOOMBRAND_PATH:?Set FOCULOOMBRAND_PATH to your foculoombrand checkout}"
+ls "$FOCULOOMBRAND_PATH/docs/brand-kit.md"
 ```
 
 ### 2. Run the fanout script
@@ -117,7 +119,7 @@ python3 scripts/release-asset-fanout/fanout.py \
 # Check dimensions for each output file
 python3 - <<'EOF'
 from PIL import Image, os
-version_dir = "/Users/hello/foculoom/infra/foculoombrand/assets/release/skiplet/1.2.0"
+version_dir = os.path.join(os.environ["FOCULOOMBRAND_PATH"], "assets/release/skiplet/1.2.0")
 for f in sorted(os.listdir(version_dir)):
     if f.endswith(".png"):
         img = Image.open(os.path.join(version_dir, f))
@@ -125,7 +127,7 @@ for f in sorted(os.listdir(version_dir)):
 EOF
 
 # Validate manifest.json is well-formed
-python3 -c "import json; d = json.load(open('/Users/hello/foculoom/infra/foculoombrand/assets/release/skiplet/1.2.0/manifest.json')); print('assets:', len(d['assets']))"
+python3 -c "import json, os; p=os.path.join(os.environ['FOCULOOMBRAND_PATH'],'assets/release/skiplet/1.2.0/manifest.json'); d=json.load(open(p)); print('assets:', len(d['assets']))"
 ```
 
 ### 4. Wire release-post hero
@@ -136,7 +138,7 @@ The `release-post` skill can reference the emitted hero directly:
 python3 scripts/release-post/generate_release_post.py \
     --input release.json \
     --product skiplet \
-    --hero /Users/hello/foculoom/infra/foculoombrand/assets/release/skiplet/1.2.0/skiplet-1.2.0-release-hero.png \
+    --hero "$FOCULOOMBRAND_PATH/assets/release/skiplet/1.2.0/skiplet-1.2.0-release-hero.png" \
     --output /path/to/website/skiplet/releases/1.2.0.html
 ```
 
@@ -145,7 +147,7 @@ python3 scripts/release-post/generate_release_post.py \
 Generated assets should be committed to the `foculoombrand` repo under `assets/release/`:
 
 ```bash
-cd /Users/hello/foculoom/infra/foculoombrand
+cd "$FOCULOOMBRAND_PATH"
 git add assets/release/{product}/{version}/
 git commit -m "feat(release): add {product} {version} release assets"
 ```
